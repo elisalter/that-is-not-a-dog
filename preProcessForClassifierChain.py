@@ -1,17 +1,18 @@
 from darkflow.net.build import TFNet
 import cv2
 import math
-import json
 import os
 
-options = {"model": "cfg/yolo.cfg",
-           "load": "bin/yolo.weights",
+options = {"model": "./cfg/yolo.cfg",
+           "load": "./bin/yolo.weights",
            "threshold": 0.3}
+
 tfnet = TFNet(options)
+
 labelOfInterest = 'dog'
 
-videoDirectory = "./Audioset-download/dataVideo_noDogs/"
-outputDirectory = "./Audioset-download/results_without_dogs/"
+videoDirectory = "./data/dataVideo_dogs/"
+outputDirectory = "./data/results_with_dogs/"
 
 for filename in os.listdir(videoDirectory):
 
@@ -43,13 +44,6 @@ for filename in os.listdir(videoDirectory):
     f = open(outputDirectory + filename + ".txt", "w+")
     f.write(str(maxConfidenceForLOI))
     print("THE MAX CONFIDENCE FOR A DOG IN THIS VIDEO " + videoFile + " is: " + str(maxConfidenceForLOI))
-
-
-
-
-
-
-
 
 
 # tfnet = TFNet(options)
