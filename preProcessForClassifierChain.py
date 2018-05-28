@@ -5,13 +5,11 @@ import os
 
 options = {"model": "./cfg/yolo.cfg",
            "load": "./bin/yolo.weights",
-           "threshold": 0.3}
+           "threshold": 0.0}
 
 tfnet = TFNet(options)
 
-labelOfInterest = 'dog'
-
-videoDirectory = "./data/dataVideo_dogs/"
+videoDirectory = "./data/testDogs/"
 outputDirectory = "./data/results_with_dogs/"
 
 coco_keys = [
@@ -97,9 +95,6 @@ coco_keys = [
     'toothbrush'
 ]
 
-nonempty_dict = dict.fromkeys(coco_keys, 0.0)
-
-print(nonempty_dict)
 
 for filename in os.listdir(videoDirectory):
 
@@ -107,7 +102,7 @@ for filename in os.listdir(videoDirectory):
     videoIn = cv2.VideoCapture(videoFile) # dummy video atm
     frameRate = videoIn.get(5)
 
-    maxConfidenceForLOI = 0.0;
+    max_pred_dict = dict.fromkeys(coco_keys, 0.0)
 
     print("Making predictions for video: " + videoFile)
 
@@ -123,13 +118,15 @@ for filename in os.listdir(videoDirectory):
             result = tfnet.return_predict(frame)
 
             for objectDetected in result:
-                if objectDetected['label'] == labelOfInterest:
-                    if objectDetected['confidence'] > maxConfidenceForLOI:
-                        maxConfidenceForLOI = objectDetected['confidence']
+                currentMax = max_pred_dict[objectDetected['label']]
+                if objectDetected['confidence'] > currentMax:
+                    max_pred_dict[objectDetected['label']] = objectDetected['confidence']
                     print(objectDetected['label'] + ": " + str(objectDetected['confidence']))
+
+
     videoIn.release()
-    f = open(outputDirectory + filename + ".txt", "w+")
-    f.write(str(maxConfidenceForLOI))
-    print("THE MAX CONFIDENCE FOR A DOG IN THIS VIDEO " + videoFile + " is: " + str(maxConfidenceForLOI))
+    # f = open(outputDirectory + filename + ".txt", "w+")
+    # f.write(str(maxConfidenceForLOI))
+    print(max_pred_dict)
 
 
