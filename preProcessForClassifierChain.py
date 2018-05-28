@@ -5,12 +5,12 @@ import os
 
 options = {"model": "./cfg/yolo.cfg",
            "load": "./bin/yolo.weights",
-           "threshold": 0.0}
+           "threshold": 0.01}
 
 tfnet = TFNet(options)
 
-videoDirectory = "./data/dataVideo_noDogs/"
-outputDirectory = "./data/multi_results_without_dogs/"
+videoDirectory = "./data/validation_dataVideo_dogs/"
+outputDirectory = "./data/validation_multi_results_with_dogs/"
 
 coco_keys = [
     'person',
