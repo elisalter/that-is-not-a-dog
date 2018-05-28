@@ -9,8 +9,8 @@ options = {"model": "./cfg/yolo.cfg",
 
 tfnet = TFNet(options)
 
-videoDirectory = "./data/testDogs/"
-outputDirectory = "./data/results_with_dogs/"
+videoDirectory = "./data/dataVideo_noDogs/"
+outputDirectory = "./data/multi_results_without_dogs/"
 
 coco_keys = [
     'person',
@@ -121,12 +121,12 @@ for filename in os.listdir(videoDirectory):
                 currentMax = max_pred_dict[objectDetected['label']]
                 if objectDetected['confidence'] > currentMax:
                     max_pred_dict[objectDetected['label']] = objectDetected['confidence']
-                    print(objectDetected['label'] + ": " + str(objectDetected['confidence']))
 
 
     videoIn.release()
-    # f = open(outputDirectory + filename + ".txt", "w+")
-    # f.write(str(maxConfidenceForLOI))
+    f = open(outputDirectory + filename + ".txt", "w+")
+    f.write(str(list(max_pred_dict.values())))
     print(max_pred_dict)
+    print("-------------------------------------------------------------")
 
 
