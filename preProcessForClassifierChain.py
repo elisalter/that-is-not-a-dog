@@ -14,6 +14,93 @@ labelOfInterest = 'dog'
 videoDirectory = "./data/dataVideo_dogs/"
 outputDirectory = "./data/results_with_dogs/"
 
+coco_keys = [
+    'person',
+    'bicycle',
+    'car',
+    'motorbike',
+    'aeroplane',
+    'bus',
+    'train',
+    'truck',
+    'boat',
+    'traffic light',
+    'fire hydrant',
+    'stop sign',
+    'parking meter',
+    'bench',
+    'bird',
+    'cat',
+    'dog',
+    'horse',
+    'sheep',
+    'cow',
+    'elephant',
+    'bear',
+    'zebra',
+    'giraffe',
+    'backpack',
+    'umbrella',
+    'handbag',
+    'tie',
+    'suitcase',
+    'frisbee',
+    'skis',
+    'snowboard',
+    'sports ball',
+    'kite',
+    'baseball bat',
+    'baseball glove',
+    'skateboard',
+    'surfboard',
+    'tennis racket',
+    'bottle',
+    'wine glass',
+    'cup',
+    'fork',
+    'knife',
+    'spoon',
+    'bowl',
+    'banana',
+    'apple',
+    'sandwich',
+    'orange',
+    'broccoli',
+    'carrot',
+    'hot dog',
+    'pizza',
+    'donut',
+    'cake',
+    'chair',
+    'sofa',
+    'pottedplant',
+    'bed',
+    'diningtable',
+    'toilet',
+    'tvmonitor',
+    'laptop',
+    'mouse',
+    'remote',
+    'keyboard',
+    'cell phone',
+    'microwave',
+    'oven',
+    'toaster',
+    'sink',
+    'refrigerator',
+    'book',
+    'clock',
+    'vase',
+    'scissors',
+    'teddy bear',
+    'hair drier',
+    'toothbrush'
+]
+
+nonempty_dict = dict.fromkeys(coco_keys, 0.0)
+
+print(nonempty_dict)
+
 for filename in os.listdir(videoDirectory):
 
     videoFile = videoDirectory + filename
@@ -45,10 +132,4 @@ for filename in os.listdir(videoDirectory):
     f.write(str(maxConfidenceForLOI))
     print("THE MAX CONFIDENCE FOR A DOG IN THIS VIDEO " + videoFile + " is: " + str(maxConfidenceForLOI))
 
-
-# tfnet = TFNet(options)
-#
-# imgcv = cv2.imread("./sample_img/sample_dog.jpg")
-# result = tfnet.return_predict(imgcv)
-# print(result)
 

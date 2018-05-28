@@ -6,7 +6,7 @@ SAMPLE_RATE=22050
 fetch_clip() {
   echo "Fetching $1 ($2 to $3)"
 
-  outname="dataVideo_noDogs/$1_$2"
+  outname="dataVideo_dogs/$1_$2"
 
   if [ -f "${outname}.mp4.gz" ]; then
     echo "Already have it."
