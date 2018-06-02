@@ -6,7 +6,7 @@ SAMPLE_RATE=22050
 fetch_clip() {
   echo "Fetching $1 ($2 to $3)"
 
-  outname="dataVideo_dogs/$1_$2"
+  outname="dataVideo_noDogs/$1_$2"
 
   if [ -f "${outname}.mp4.gz" ]; then
     echo "Already have it."
@@ -14,7 +14,7 @@ fetch_clip() {
   elif [ -f "${outname}.mp4" ]; then 
     echo "Already have it. But decompressed"
     return
-  fi
+  fiv
 
   youtube-dl https://youtube.com/watch?v=$1 \
       -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4' \
